@@ -1,6 +1,6 @@
 import { Duck } from "./Duck";
-import { FlyNoWay } from "./FlyBehavior";
-import { MuteQuack } from "./QuackBehavior";
+import { FlyNoWay } from "../behavior/FlyBehavior";
+import { MuteQuack } from "../behavior/QuackBehavior";
 
 
 export class RubberDuck extends Duck {

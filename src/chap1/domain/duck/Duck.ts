@@ -1,8 +1,7 @@
-import { FlyBehavior } from "./FlyBehavior";
-import { QuackBehavior } from "./QuackBehavior";
+import { FlyBehavior } from "../behavior/FlyBehavior";
+import { QuackBehavior } from "../behavior/QuackBehavior";
 
 export abstract class Duck {
-
     private flyBehavior: FlyBehavior;
     private quackBehavior: QuackBehavior;
 
@@ -15,6 +14,10 @@ export abstract class Duck {
     }) {
         this.flyBehavior = flyBehavior;
         this.quackBehavior = quackBehavior;
+    }
+
+    public setFlyBehavior(flyBehaviore: FlyBehavior): void {
+        this.flyBehavior = flyBehaviore
     }
 
     public swim(): void {
