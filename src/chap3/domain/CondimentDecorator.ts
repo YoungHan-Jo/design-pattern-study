@@ -1,15 +1,11 @@
 import { Beverage } from "./Beverage";
 
 export abstract class CondimentDecorator extends Beverage {
-    private beverage: Beverage;
+    protected beverage: Beverage;
 
     constructor(beverage: Beverage) {
         super({});
         this.beverage = beverage;
-    }
-
-    protected getBeverage(): Beverage {
-        return this.beverage;
     }
 
     public abstract getDescription(): string;
@@ -21,10 +17,10 @@ export class Mocha extends CondimentDecorator {
     }
 
     public getDescription(): string {
-        return this.getBeverage().getDescription() + ', Mocha';
+        return this.beverage.getDescription() + ', Mocha';
     }
     public cost(): number {
-        return this.getBeverage().cost() + 0.20;
+        return this.beverage.cost() + 0.20;
     }
 }
 
@@ -34,10 +30,10 @@ export class Soy extends CondimentDecorator {
     }
 
     public getDescription(): string {
-        return this.getBeverage().getDescription() + ', Soy';
+        return this.beverage.getDescription() + ', Soy';
     }
     public cost(): number {
-        return this.getBeverage().cost() + 0.15;
+        return this.beverage.cost() + 0.15;
     }
 }
 
@@ -47,10 +43,10 @@ export class Whip extends CondimentDecorator {
     }
 
     public getDescription(): string {
-        return this.getBeverage().getDescription() + ', Whip';
+        return this.beverage.getDescription() + ', Whip';
     }
     public cost(): number {
-        return this.getBeverage().cost() + 0.10;
+        return this.beverage.cost() + 0.10;
     }
 }
 
@@ -60,10 +56,10 @@ export class Milk extends CondimentDecorator {
     }
 
     public getDescription(): string {
-        return this.getBeverage().getDescription() + ', Milk';
+        return this.beverage.getDescription() + ', Milk';
     }
     public cost(): number {
-        return this.getBeverage().cost() + 0.10;
+        return this.beverage.cost() + 0.10;
     }
 }
 
