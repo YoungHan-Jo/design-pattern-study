@@ -1,15 +1,7 @@
 import { WeatherData } from "./WeatherData";
 
 export interface Observer {
-    update({
-        temperature,
-        humidity,
-        pressure
-    }: {
-        temperature: number;
-        humidity: number;
-        pressure: number;
-    }): void;
+    update(): void;
 }
 
 interface DisplayElement {
@@ -25,9 +17,9 @@ export class CurrentConditionDisplay implements Observer, DisplayElement {
         this.weatherData = weatherData;
         this.weatherData.registerObserver(this);
     }
-    update({ temperature, humidity, pressure: _ }: { temperature: number; humidity: number; pressure: number; }): void {
-        this.temperature = temperature;
-        this.humidity = humidity;
+    update(): void {
+        this.temperature = this.weatherData.getTemperature();
+        this.humidity = this.weatherData.getHumidity();
         this.display();
     }
     public display(): void {
@@ -39,18 +31,32 @@ export class CurrentConditionDisplay implements Observer, DisplayElement {
 }
 
 export class StatisticDisplay implements Observer, DisplayElement {
-    update({ temperature, humidity, pressure }: { temperature: number; humidity: number; pressure: number; }): void {
+    update(): void {
         throw new Error("Method not implemented.");
     }
+
     public display(): void {
         console.log('StatisticDisplay display');
     }
 }
 
 export class ForecastDisplay implements Observer, DisplayElement {
-    update({ temperature, humidity, pressure }: { temperature: number; humidity: number; pressure: number; }): void {
-        throw new Error("Method not implemented.");
+
+    private currentPressure: number = 29.92;
+    private lastPressure: number;
+    private weatherData: WeatherData;
+
+    constructor(weatherData: WeatherData) {
+        this.weatherData = weatherData;
+        this.weatherData.registerObserver(this);
     }
+
+    update(): void {
+        this.lastPressure = this.currentPressure;
+        this.currentPressure = this.weatherData.getPressure();
+        this.display();
+    }
+
     public display(): void {
         console.log('ForecastDisplay display');
     }

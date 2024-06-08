@@ -37,14 +37,9 @@ export class WeatherData implements Subject {
         this.observers = this.observers.filter(display => display !== observer);
     }
 
-
     public notifyObservers(): void {
         for (const display of this.observers) {
-            display.update({
-                temperature: this.getTemperature(),
-                humidity: this.getHumidity(),
-                pressure: this.getPressure()
-            });
+            display.update();
         }
     }
 
