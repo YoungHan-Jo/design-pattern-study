@@ -1,18 +1,12 @@
 import { Duck } from "./Duck";
-import { FlyBehavior } from "./FlyBehavior";
-import { QuackBehavior } from "./QuackBehavior";
+import { FlyWithWings } from "./FlyBehavior";
+import { Quack } from "./QuackBehavior";
 
 
 export class MallardDuck extends Duck {
 
-    constructor({
-        flyBehavior,
-        quackBehavior
-    }: {
-        flyBehavior: FlyBehavior,
-        quackBehavior: QuackBehavior
-    }) {
-        super({ flyBehavior, quackBehavior });
+    constructor() {
+        super({ flyBehavior: new FlyWithWings(), quackBehavior: new Quack() });
     }
 
     public display(): void {
