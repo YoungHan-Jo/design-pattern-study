@@ -1,12 +1,14 @@
-import { DarkRoast, Espresso } from "./Beverage"
-import { Milk, Mocha } from "./CondimentDecorator";
+import { DarkRoast, Espresso, HouseBlend } from "./Beverage"
+import { Milk, Mocha, Soy } from "./CondimentDecorator";
 
 describe('domain', () => {
 
     const EspressoCost = 1.99;
     const DarkRoastCost = 0.99;
+    const HouseBlendCost = 0.89;
     const MochaCost = 0.20;
     const MilkCost = 0.10;
+    const SoyCost = 0.15;
 
 
     it('no condiment', () => {
@@ -45,6 +47,21 @@ describe('domain', () => {
         // Then
         expect(darkRoastMochaLatte.getDescription()).toBe('Dark Roast, Mocha, Milk');
         expect(darkRoastMochaLatte.cost()).toBe(DarkRoastCost + MochaCost + MilkCost);
+
+    })
+
+    it('double mocha soy latte', () => {
+        // Given
+        const coffee = new HouseBlend();
+
+        const doubleMochaSoyLatte = new Soy(new Mocha(new Mocha(coffee)));
+        // When
+        const description = doubleMochaSoyLatte.getDescription();
+
+
+        // Then
+        expect(description).toBe('House Blend, Mocha, Mocha, Soy');
+        expect(doubleMochaSoyLatte.cost()).toBe(HouseBlendCost + MochaCost + MochaCost + SoyCost);
 
     })
 })
