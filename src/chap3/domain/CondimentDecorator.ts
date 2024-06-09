@@ -11,6 +11,45 @@ export abstract class CondimentDecorator extends Beverage {
     public abstract getDescription(): string;
 }
 
+export class Tall extends CondimentDecorator {
+    constructor(beverage: Beverage) {
+        super(beverage);
+    }
+
+    public getDescription(): string {
+        return this.beverage.getDescription() + ', Tall';
+    }
+    public cost(): number {
+        return this.beverage.cost();
+    }
+}
+
+export class Grande extends CondimentDecorator {
+    constructor(beverage: Beverage) {
+        super(beverage);
+    }
+
+    public getDescription(): string {
+        return this.beverage.getDescription() + ', Grande';
+    }
+    public cost(): number {
+        return this.beverage.cost() * 1.1;
+    }
+}
+
+export class Venti extends CondimentDecorator {
+    constructor(beverage: Beverage) {
+        super(beverage);
+    }
+
+    public getDescription(): string {
+        return this.beverage.getDescription() + ', Venti';
+    }
+    public cost(): number {
+        return this.beverage.cost() * 1.2;
+    }
+}
+
 export class Mocha extends CondimentDecorator {
     constructor(beverage: Beverage) {
         super(beverage);
