@@ -1,5 +1,5 @@
 export abstract class Beverage {
-    private description?: string = "Unknown Beverage";
+    private description: string = "Unknown Beverage";
 
     constructor({ description }: { description?: string }) {
         if (description) {
