@@ -1,66 +1,55 @@
-export interface Pizza {
-    prepare(): void;
-    bake(): void;
-    cut(): void;
-    box(): void;
-}
+export abstract class Pizza {
 
-export class CheesePizza implements Pizza {
-    prepare() {
-        console.log('Preparing Cheese Pizza');
-    }
-    bake() {
-        console.log('Baking Cheese Pizza');
-    }
-    cut() {
-        console.log('Cutting Cheese Pizza');
-    }
-    box() {
-        console.log('Boxing Cheese Pizza');
-    }
-}
+    protected name: string;
+    protected dough: string;
+    protected sauce: string;
+    protected toppings: string[] = [];
 
-export class PepperoniPizza implements Pizza {
-    prepare() {
-        console.log('Preparing Pepperoni Pizza');
+    prepare(): void {
+        console.log('Preparing ' + this.name);
+        console.log('Tossing dough...');
+        console.log('Adding sauce...');
+        console.log('Adding toppings: ');
+        for (const topping of this.toppings) {
+            console.log('   ' + topping);
+        }
     }
-    bake() {
-        console.log('Baking Pepperoni Pizza');
+    bake(): void {
+        console.log('Baking for 25 minutes at 350');
     }
-    cut() {
-        console.log('Cutting Pepperoni Pizza');
+    cut(): void {
+        console.log('Cutting the pizza into diagonal slices');
     }
-    box() {
-        console.log('Boxing Pepperoni Pizza');
+    box(): void {
+        console.log('Place pizza in official PizzaStore box');
+    }
+
+    public getName(): string {
+        return this.name;
     }
 }
 
-export class ClamPizza implements Pizza {
-    prepare() {
-        console.log('Preparing Clam Pizza');
-    }
-    bake() {
-        console.log('Baking Clam Pizza');
-    }
-    cut() {
-        console.log('Cutting Clam Pizza');
-    }
-    box() {
-        console.log('Boxing Clam Pizza');
+export class NYStyleCheesePizza extends Pizza {
+    public constructor() {
+        super();
+        this.name = 'NY Style Sauce and Cheese Pizza';
+        this.dough = 'Thin Crust Dough';
+        this.sauce = 'Marinara Sauce';
+        this.toppings.push('Grated Reggiano Cheese');
     }
 }
 
-export class VeggiePizza implements Pizza {
-    prepare() {
-        console.log('Preparing Veggie Pizza');
+export class ChicagoStyleCheesePizza extends Pizza {
+    public constructor() {
+        super();
+        this.name = 'Chicago Style Deep Dish Cheese Pizza';
+        this.dough = 'Extra Thick Crust Dough';
+        this.sauce = 'Plum Tomato Sauce';
+        this.toppings.push('Shredded Mozzarella Cheese');
     }
-    bake() {
-        console.log('Baking Veggie Pizza');
-    }
-    cut() {
-        console.log('Cutting Veggie Pizza');
-    }
-    box() {
-        console.log('Boxing Veggie Pizza');
+
+    cut(): void {
+        console.log('Cutting the pizza into square slices');
     }
 }
+

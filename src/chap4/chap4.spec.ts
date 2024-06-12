@@ -1,27 +1,22 @@
-import { PizzaStore } from "./domain/PizzaStore";
+import { ChicagoStylePizzaStore, NYStylePizzaStore, PizzaStore } from "./domain/PizzaStore";
 import { SimplePizzaFactory } from "./domain/SimplePizzaFactory";
-
 
 describe('chap4', () => {
 
     const consoleSpy = jest.spyOn(console, 'log');
 
-    const simplePizzaFactory = new SimplePizzaFactory();
-
-    it('create pizza using simple factory', () => {
+    it('factory method', () => {
         // Given
-        const pizzaStore = new PizzaStore(simplePizzaFactory)
+        const nyStore = new NYStylePizzaStore();
+        const chicagoStore = new ChicagoStylePizzaStore();
 
         // When
-        pizzaStore.orderPizza('Cheese')
+        const nyPizza = nyStore.orderPizza('Cheese');
+        const chicagoPizza = chicagoStore.orderPizza('Cheese');
 
         // Then
-        expect(consoleSpy).toHaveBeenCalledWith('Preparing Cheese Pizza');
-        expect(consoleSpy).toHaveBeenCalledWith('Baking Cheese Pizza');
-        expect(consoleSpy).toHaveBeenCalledWith('Cutting Cheese Pizza');
-        expect(consoleSpy).toHaveBeenCalledWith('Boxing Cheese Pizza');
-
-
+        expect(nyPizza.getName()).toBe('NY Style Sauce and Cheese Pizza');
+        expect(chicagoPizza.getName()).toBe('Chicago Style Deep Dish Cheese Pizza');
 
     })
 })

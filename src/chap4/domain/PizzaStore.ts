@@ -1,16 +1,10 @@
 import { PizzaType } from "../constants/PizzaType";
-import { Pizza } from "./Pizza";
-import { SimplePizzaFactory } from "./SimplePizzaFactory";
+import { ChicagoStyleCheesePizza, NYStyleCheesePizza, Pizza } from "./Pizza";
 
-export class PizzaStore {
-    private factory: SimplePizzaFactory;
-
-    constructor(factory: SimplePizzaFactory) {
-        this.factory = factory;
-    }
+export abstract class PizzaStore {
 
     public orderPizza(type: PizzaType): Pizza {
-        const pizza = this.factory.createPizza(type);
+        const pizza = this.createPizza(type);
 
         pizza.prepare();
         pizza.bake();
@@ -20,4 +14,21 @@ export class PizzaStore {
         return pizza;
     }
 
+    abstract createPizza(type: PizzaType): Pizza
+}
+
+export class NYStylePizzaStore extends PizzaStore {
+    createPizza(type: PizzaType): Pizza {
+        if (type === PizzaType.Cheese) {
+            return new NYStyleCheesePizza();
+        }
+    }
+}
+
+export class ChicagoStylePizzaStore extends PizzaStore {
+    createPizza(type: PizzaType): Pizza {
+        if (type === PizzaType.Cheese) {
+            return new ChicagoStyleCheesePizza();
+        }
+    }
 }
