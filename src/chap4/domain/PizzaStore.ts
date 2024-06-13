@@ -1,5 +1,6 @@
 import { PizzaType } from "../constants/PizzaType";
-import { ChicagoStyleCheesePizza, NYStyleCheesePizza, Pizza } from "./Pizza";
+import { CheesePizza, ClamPizza, PepperoniPizza, Pizza, VeggiePizza } from "./Pizza";
+import { ChicagoPizzaIngredientFactory, NYPizzaIngredientFactory } from "./ingredients";
 
 export abstract class PizzaStore {
 
@@ -14,21 +15,57 @@ export abstract class PizzaStore {
         return pizza;
     }
 
-    abstract createPizza(type: PizzaType): Pizza
+    protected abstract createPizza(type: PizzaType): Pizza
 }
 
 export class NYStylePizzaStore extends PizzaStore {
-    createPizza(type: PizzaType): Pizza {
+    protected createPizza(type: PizzaType): Pizza {
+        let pizza: Pizza;
+        const ingredientFactory = new NYPizzaIngredientFactory();
+
         if (type === PizzaType.Cheese) {
-            return new NYStyleCheesePizza();
+            pizza = new CheesePizza(ingredientFactory);
+            pizza.setName('NY Style Sauce and Cheese Pizza');
         }
+        if (type === PizzaType.Veggie) {
+            pizza = new VeggiePizza(ingredientFactory);
+            pizza.setName('NY Style Veggie Pizza');
+        }
+        if (type === PizzaType.Clam) {
+            pizza = new ClamPizza(ingredientFactory);
+            pizza.setName('NY Style Clam Pizza');
+        }
+        if (type === PizzaType.Pepperoni) {
+            pizza = new PepperoniPizza(ingredientFactory);
+            pizza.setName('NY Style Pepperoni Pizza');
+        }
+
+        return pizza;
     }
 }
 
 export class ChicagoStylePizzaStore extends PizzaStore {
-    createPizza(type: PizzaType): Pizza {
+    protected createPizza(type: PizzaType): Pizza {
+        let pizza: Pizza;
+        const ingredientFactory = new ChicagoPizzaIngredientFactory();
+
         if (type === PizzaType.Cheese) {
-            return new ChicagoStyleCheesePizza();
+            pizza = new CheesePizza(ingredientFactory);
+            pizza.setName('Chicago Style Deep Dish Cheese Pizza');
         }
+        if (type === PizzaType.Veggie) {
+            pizza = new VeggiePizza(ingredientFactory);
+            pizza.setName('Chicago Style Veggie Pizza');
+        }
+        if (type === PizzaType.Clam) {
+            pizza = new ClamPizza(ingredientFactory);
+            pizza.setName('Chicago Style Clam Pizza');
+        }
+        if (type === PizzaType.Pepperoni) {
+            pizza = new PepperoniPizza(ingredientFactory);
+            pizza.setName('Chicago Style Pepperoni Pizza');
+        }
+
+        return pizza;
     }
 }
