@@ -1,3 +1,4 @@
+import { CeilingFanOffCommand as NewCeilingFanOffCommand, CeilingFanHighCommand, CeilingFanMediumCommand } from "./domain/CeilingFanCommand";
 import { CeilingFanOffCommand, CeilingFanOnCommand, GarageDoorOpenCommand, LightOffCommand, LightOnCommand, StereoOffCommand, StereoOnWithCDCommand } from "./domain/Command";
 import { RemoteControl } from "./domain/RemoteControl";
 import { RemoteControlWithUndo } from "./domain/RemoteControlWithUndo";
@@ -148,6 +149,45 @@ describe('chap6', () => {
 
         // Then
 
+    })
+
+    it('ceiling fan remote control', () => {
+        // Given
+        const remoteControl = new RemoteControlWithUndo();
+
+        const ceilingFan = new CeilingFan('Living Room');
+
+        const ceilingFanMedium = new CeilingFanMediumCommand(ceilingFan);
+        const ceilingFanHigh = new CeilingFanHighCommand(ceilingFan);
+        const ceilingFanOff = new NewCeilingFanOffCommand(ceilingFan);
+
+        remoteControl.setCommand({
+            slot: 0,
+            onCommand: ceilingFanMedium,
+            offCommand: ceilingFanOff
+        });
+
+        remoteControl.setCommand({
+            slot: 1,
+            onCommand: ceilingFanHigh,
+            offCommand: ceilingFanOff
+        });
+
+        // When & Then
+        remoteControl.onButtonWasPushed(0);
+        expect(ceilingFan.getSpeed()).toBe(CeilingFan.MEDIUM);
+
+        remoteControl.offButtonWasPushed(0);
+        expect(ceilingFan.getSpeed()).toBe(CeilingFan.OFF);
+
+        remoteControl.undoButtonWasPushed();
+        expect(ceilingFan.getSpeed()).toBe(CeilingFan.MEDIUM);
+
+        remoteControl.onButtonWasPushed(1);
+        expect(ceilingFan.getSpeed()).toBe(CeilingFan.HIGH);
+
+        remoteControl.undoButtonWasPushed();
+        expect(ceilingFan.getSpeed()).toBe(CeilingFan.MEDIUM);
 
     })
 
