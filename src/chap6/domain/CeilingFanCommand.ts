@@ -65,7 +65,7 @@ export class CeilingFanLowCommand extends CeilingFanCommand {
     }
 }
 
-export class CeilingFanOffCommand extends CeilingFanCommand {
+export class CeilingFanOffCommandWithPrevSpeed extends CeilingFanCommand {
     public constructor(ceilingFan: CeilingFan) {
         super(ceilingFan);
     }

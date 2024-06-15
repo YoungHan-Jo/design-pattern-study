@@ -1,4 +1,6 @@
 import { CeilingFan, GarageDoor, Light, Stereo } from "./objects";
+import { Hottub } from "./objects/Hottub";
+import { TV } from "./objects/Tv";
 
 export interface Command {
     excute(): void;
@@ -115,5 +117,65 @@ export class StereoOffCommand implements Command {
         this.stereo.on();
         this.stereo.setCD();
         this.stereo.setVolume(11);
+    }
+}
+
+export class TVOnCommand implements Command {
+    private tv: TV;
+
+    constructor(tv: TV) {
+        this.tv = tv;
+    }
+    excute(): void {
+        this.tv.on();
+    }
+
+    undo(): void {
+        this.tv.off();
+    }
+}
+
+export class TVOffCommand implements Command {
+    private tv: TV;
+
+    constructor(tv: TV) {
+        this.tv = tv;
+    }
+    excute(): void {
+        this.tv.off();
+    }
+
+    undo(): void {
+        this.tv.on();
+    }
+}
+
+export class HottubOnCommand implements Command {
+    private hottub: Hottub;
+
+    constructor(hottub: Hottub) {
+        this.hottub = hottub;
+    }
+    excute(): void {
+        this.hottub.on();
+    }
+
+    undo(): void {
+        this.hottub.off();
+    }
+}
+
+export class HottubOffCommand implements Command {
+    private hottub: Hottub;
+
+    constructor(hottub: Hottub) {
+        this.hottub = hottub;
+    }
+    excute(): void {
+        this.hottub.off();
+    }
+
+    undo(): void {
+        this.hottub.on();
     }
 }
