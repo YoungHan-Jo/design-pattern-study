@@ -1,13 +1,12 @@
-import { DinerMenu } from "./DinerMenu";
 import { Iterator } from "./Iterator";
+import { Menu } from "./Menu";
 import { MenuItem } from "./MenuItem";
-import { PancakeHouseMenu } from "./PancakeHouseMenu";
 
 export class Waitress {
-    private pancakeHouseMenu: PancakeHouseMenu;
-    private dinerMenu: DinerMenu;
+    private pancakeHouseMenu: Menu;
+    private dinerMenu: Menu;
 
-    constructor(pancakeHouseMenu: PancakeHouseMenu, dinerMenu: DinerMenu) {
+    constructor(pancakeHouseMenu: Menu, dinerMenu: Menu) {
         this.pancakeHouseMenu = pancakeHouseMenu;
         this.dinerMenu = dinerMenu;
     }
