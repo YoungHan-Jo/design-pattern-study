@@ -1,6 +1,8 @@
+import { CafeMenuIterator, Iterator } from "./Iterator";
+import { Menu } from "./Menu";
 import { MenuItem } from "./MenuItem";
 
-export class CafeMenu {
+export class CafeMenu implements Menu {
     private menuItems: Map<string, MenuItem>;
 
     public constructor() {
@@ -15,7 +17,7 @@ export class CafeMenu {
         this.menuItems.set(name, new MenuItem({ name, description, vegetarian, price }));
     }
 
-    public getMenuItems(): Map<string, MenuItem> {
-        return this.menuItems;
+    public createIterator(): Iterator<MenuItem> {
+        return new CafeMenuIterator(this.menuItems);
     }
 }

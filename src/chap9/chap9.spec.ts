@@ -1,3 +1,4 @@
+import { CafeMenu } from "./domain/CafeMenu";
 import { DinerMenu } from "./domain/DinerMenu";
 import { PancakeHouseMenu } from "./domain/PancakeHouseMenu"
 import { Waitress } from "./domain/Waitress";
@@ -9,10 +10,10 @@ describe('chap9', () => {
     it('chap9', () => {
         // Given
         const pancakeHouseMenu = new PancakeHouseMenu();
-
         const dinerMenu = new DinerMenu();
+        const cafeMenu = new CafeMenu();
 
-        const waitress = new Waitress(pancakeHouseMenu, dinerMenu)
+        const waitress = new Waitress(pancakeHouseMenu, dinerMenu, cafeMenu)
 
 
         // When
@@ -22,6 +23,7 @@ describe('chap9', () => {
         // Then
         expect(consoleSpy).toHaveBeenCalledWith("Waffles")
         expect(consoleSpy).toHaveBeenCalledWith("Hotdog")
+        expect(consoleSpy).toHaveBeenCalledWith("Soup of the day")
 
 
 
