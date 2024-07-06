@@ -1,26 +1,25 @@
-import { StreamingPlayer } from "./SteamingPlayer";
+import { StreamingPlayer } from './SteamingPlayer';
 
 export class Projector {
-    private player: StreamingPlayer;
+  private player: StreamingPlayer;
 
-    constructor(player: StreamingPlayer) {
-        this.player = player;
-    }
+  constructor(player: StreamingPlayer) {
+    this.player = player;
+  }
 
-    public on(): void {
-        console.log('Projector is on');
-    }
+  public on(): void {
+    console.log('Projector is on');
+  }
 
-    public off(): void {
-        console.log('Projector is off');
-    }
+  public off(): void {
+    console.log('Projector is off');
+  }
 
-    public tvMode(): void {
-        console.log('Projector is in tv mode');
-    }
+  public tvMode(): void {
+    console.log('Projector is in tv mode');
+  }
 
-    public wideScreenMode(): void {
-        console.log('Projector is in wide screen mode (16x9 aspect ratio)');
-    }
-
+  public wideScreenMode(): void {
+    console.log('Projector is in wide screen mode (16x9 aspect ratio)');
+  }
 }
