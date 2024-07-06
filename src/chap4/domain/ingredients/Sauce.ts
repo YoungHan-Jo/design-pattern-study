@@ -1,6 +1,5 @@
-export interface Sauce { }
+export interface Sauce {}
 
-export class MarinaraSauce implements Sauce { }
+export class MarinaraSauce implements Sauce {}
 
-export class PlumTomatoSauce implements Sauce { }
-
+export class PlumTomatoSauce implements Sauce {}

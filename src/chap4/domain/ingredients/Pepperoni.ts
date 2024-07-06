@@ -1,3 +1,3 @@
-export interface Pepperoni { }
+export interface Pepperoni {}
 
-export class SlicedPepperoni implements Pepperoni { }
+export class SlicedPepperoni implements Pepperoni {}

@@ -1,47 +1,43 @@
-import { Duck, MallardDuck } from "./Duck"
-import { DuckAdapter } from "./DuckAdapter";
-import { Turkey, WildTurkey } from "./Turkey";
-import { TurkeyAdapter } from "./TurkeyAdapter";
+import { Duck, MallardDuck } from './Duck';
+import { DuckAdapter } from './DuckAdapter';
+import { Turkey, WildTurkey } from './Turkey';
+import { TurkeyAdapter } from './TurkeyAdapter';
 
 describe('duck', () => {
+  const consoleSpy = jest.spyOn(console, 'log');
 
-    const consoleSpy = jest.spyOn(console, 'log');
+  it('duck test', () => {
+    // Given
+    const turkey = new WildTurkey();
+    const turkeyAdapter = new TurkeyAdapter(turkey);
 
-    it('duck test', () => {
-        // Given
-        const turkey = new WildTurkey();
-        const turkeyAdapter = new TurkeyAdapter(turkey);
+    const testDuck = (duck: Duck) => {
+      duck.quack();
+      duck.fly();
+    };
 
-        const testDuck = (duck: Duck) => {
-            duck.quack();
-            duck.fly();
-        }
+    // When
+    testDuck(turkeyAdapter);
 
-        // When
-        testDuck(turkeyAdapter);
+    // Then
+    expect(consoleSpy).toHaveBeenCalledWith('Gobble gobble');
+    expect(consoleSpy).toHaveBeenCalledWith('I am flying a short distance');
+  });
 
+  it('duck adapter test', () => {
+    // Given
+    const duck = new MallardDuck();
+    const duckAdapter = new DuckAdapter(duck);
 
-        // Then
-        expect(consoleSpy).toHaveBeenCalledWith('Gobble gobble');
-        expect(consoleSpy).toHaveBeenCalledWith('I am flying a short distance');
-    })
+    const testTurkey = (turkey: Turkey) => {
+      turkey.gobble();
+      turkey.fly();
+    };
+    // When
 
-    it('duck adapter test', () => {
-        // Given
-        const duck = new MallardDuck();
-        const duckAdapter = new DuckAdapter(duck);
+    testTurkey(duckAdapter);
 
-        const testTurkey = (turkey: Turkey) => {
-            turkey.gobble();
-            turkey.fly();
-        }
-        // When
-
-        testTurkey(duckAdapter)
-
-        // Then
-        expect(consoleSpy).toHaveBeenCalledWith('Quack');
-
-    })
-
-})
+    // Then
+    expect(consoleSpy).toHaveBeenCalledWith('Quack');
+  });
+});

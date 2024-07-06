@@ -1,16 +1,15 @@
-import { Command } from "./Command";
+import { Command } from './Command';
 
 export class SimpleRemoteControl {
-    private slot: Command;
+  private slot: Command;
 
-    public constructor() { }
+  public constructor() {}
 
-    public setCommand(command: Command): void {
-        this.slot = command;
-    }
+  public setCommand(command: Command): void {
+    this.slot = command;
+  }
 
-    public buttonWasPressed(): void {
-        this.slot.excute();
-    }
-
+  public buttonWasPressed(): void {
+    this.slot.excute();
+  }
 }

@@ -1,25 +1,24 @@
-import { Iterator } from "./Iterator";
-import { Menu } from "./Menu";
-import { MenuItem } from "./MenuItem";
+import { Iterator } from './Iterator';
+import { MenuComponent } from './MenuComponent';
+import { MenuItem } from './MenuItem';
 
 export class Waitress {
-    private menus: Menu[];
+  private allMenus: MenuComponent;
 
-    constructor(menus: Menu[]) {
-        this.menus = menus;
-    }
+  constructor(allMenus: MenuComponent) {
+    this.allMenus = allMenus;
+  }
 
-    public printMenu(): void {
-        const menuIterators = this.menus.map(menu => menu.createIterator())
-        menuIterators.forEach(iterator => this.printMenuItems(iterator))
-    }
+  public printMenu(): void {
+    this.allMenus.print();
+  }
 
-    private printMenuItems(iterator: Iterator<MenuItem>): void {
-        while (iterator.hasNext()) {
-            const menuItem = iterator.next();
-            console.log(menuItem.getName())
-            console.log(menuItem.getPrice())
-            console.log(menuItem.getDescription())
-        }
+  private printMenuItems(iterator: Iterator<MenuItem>): void {
+    while (iterator.hasNext()) {
+      const menuItem = iterator.next();
+      console.log(menuItem.getName());
+      console.log(menuItem.getPrice());
+      console.log(menuItem.getDescription());
     }
+  }
 }
