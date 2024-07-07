@@ -1,8 +1,5 @@
-import { CafeMenu } from './domain/CafeMenu';
-import { DinerMenu } from './domain/DinerMenu';
 import { Menu } from './domain/Menu';
 import { MenuItem } from './domain/MenuItem';
-import { PancakeHouseMenu } from './domain/PancakeHouseMenu';
 import { Waitress } from './domain/Waitress';
 
 describe('chap9', () => {
